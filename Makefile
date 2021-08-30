@@ -9,7 +9,7 @@ all: $(TARGET)
 rebuild: all
 
 $(TARGET) :
-	$(CPPGNU) $(SOURCE)$(TARGET).cpp -o $(TARGET)
+	$(CPPGNU) $(SOURCE)*.cpp -o $(TARGET)
 
 clean :
 	-rm -f $(TARGET)

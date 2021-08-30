@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <iostream.h>
+#include <iostream>
 #include "error.h"
 
 int errorCount = 0;

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include <iostream.h>
+#include <iostream>
 #include <time.h>
 #include "common.h"
 #include "buffer.h"

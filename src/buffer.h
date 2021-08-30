@@ -1,11 +1,13 @@
 #ifndef buffer_h
 #define buffer
 
-#include <fstream.h>
+#include <fstream>
 #include <stdio.h>
 #include <string.h>
 #include "misc.h"
 #include "error.h"
+
+using namespace std;
 
 extern char eofChar;
 extern int inputPosition;
@@ -72,7 +74,7 @@ class TListBuffer : public TTextOutBuffer
 		void PrintPageHeader(void);
 
 	public:
-		virtual ~TListBuffer(void) { delete pSourceFile; }
+		virtual ~TListBuffer(void) { delete pSourceFileName; }
 
 		void Initialize(const char *fileName);
 		virtual void PutLine(void);

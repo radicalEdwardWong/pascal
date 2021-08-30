@@ -2,11 +2,11 @@
  * include paeg headings, line numbers, and nesting levels.
  */
 
-#include <iostream.h>
+#include <iostream>
 #include "error.h"
 #include "buffer.h"
 
-void main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	char ch; // character fetched from source
 
