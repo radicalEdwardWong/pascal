@@ -19,10 +19,10 @@ TTextInBuffer::TTextInBuffer(const char *pInputFileName, TAbortCode ac)
 {
 	strcpy(pFileName, pInputFileName);
 
-	file.open(pFileName, ios::in|ios::nocreate);
+	file.open(pFileName, ios::in);
 
 	if (!file.good())
-		AbortTransaction(ac);
+		AbortTranslation(ac);
 }
 
 /* Fetch and return the next character from the text buffer.
@@ -36,10 +36,10 @@ char TTextInBuffer::GetChar(void)
 	const int tabSize = 4;
 	char ch; // character to return
 
-	if (*pChar  == eoifChar)
+	if (*pChar  == eofChar)
 		return eofChar; // end of file
 	else if (*pChar == '\0')
-		char = GetLine(); / end of line
+		ch = GetLine(); // end of line
 	else
 	{
 		++pChar; // next char
@@ -126,28 +126,28 @@ void TListBuffer::PrintPageHeader(void)
  * and print the first header.
  * pFileName: ptr to source (for page header)
  */
-void TListBuffer::Initialize(const char *pFileNam)
+void TListBuffer::Initialize(const char *pFileName)
 {
 	text[0] = '\0';
 	pageNumber = 0;
 
 	pSourceFileName = new char[strlen(pFileName) + 1];
-	strcpy(pSourceFieName, pFileName);
+	strcpy(pSourceFileName, pFileName);
 
 	time_t timer;
 	time(&timer);
-	srcpy(date, asctime(localtime(&timer)));
+	strcpy(date, asctime(localtime(&timer)));
 	date[strlen(date) - 1] = '\0'; // remove '\n' at end
 
 	PrintPageHeader();
 }
 
-void TListBuffer::PutLint(void)
+void TListBuffer::PutLine(void)
 {
 	if (listFlag && (lineCount == maxLinesPerPage))
 		PrintPageHeader();
 
-	text[maxPrintLinesLength] = '\0';
+	text[maxPrintLineLength] = '\0';
 
 	cout << text << endl;
 	test[0] = '\0';

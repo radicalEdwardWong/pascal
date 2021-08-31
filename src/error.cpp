@@ -2,6 +2,8 @@
 #include <iostream>
 #include "error.h"
 
+use namespace std;
+
 int errorCount = 0;
 
 static char *abortMsg[] = {
