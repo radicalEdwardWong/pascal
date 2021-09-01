@@ -7,7 +7,7 @@
 
 char eofChar = 0x7F; // special end-of-file char
 int inputPosition; // *virtual* position of the current char in the input buffer (with tabs expanded)
-int listFlag; // true if list source line, else false
+int listFlag = true; // true if list source line, else false
 
 /* Construct a input text buffer by opening the input file
  * pInputFileName: ptr to the name of the input file
@@ -138,8 +138,6 @@ void TListBuffer::Initialize(const char *pFileName)
 	time(&timer);
 	strcpy(date, asctime(localtime(&timer)));
 	date[strlen(date) - 1] = '\0'; // remove '\n' at end
-
-	PrintPageHeader();
 }
 
 void TListBuffer::PutLine(void)
@@ -150,7 +148,7 @@ void TListBuffer::PutLine(void)
 	text[maxPrintLineLength] = '\0';
 
 	cout << text << endl;
-	test[0] = '\0';
+	text[0] = '\0';
 
 	++lineCount;
 }

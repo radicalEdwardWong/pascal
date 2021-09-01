@@ -6,6 +6,8 @@
 #include "error.h"
 #include "buffer.h"
 
+using namespace std;
+
 int main(int argc, char *argv[])
 {
 	char ch; // character fetched from source
@@ -20,5 +22,6 @@ int main(int argc, char *argv[])
 	do
 	{
 		ch = source.GetChar();
+
 	} while (ch != eofChar);
 }

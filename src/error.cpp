@@ -2,11 +2,11 @@
 #include <iostream>
 #include "error.h"
 
-use namespace std;
+using namespace std;
 
 int errorCount = 0;
 
-static char *abortMsg[] = {
+static const char *abortMsg[] = {
 	NULL,
 	"Invalid command line arguments",
 	"Failed to open source file",
