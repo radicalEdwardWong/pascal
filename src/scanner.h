@@ -32,7 +32,13 @@ class TTextScanner : public TScanner {
 };
 
 class TTextScanner : public TScanner {
-	TTextInBuffer *const pTextInBuffer; // ptr to input text buffer to scan
+	private:
+		TTextInBuffer *const pTextInBuffer; // ptr to input text buffer to scan
+		void SkiWhiteSpace(void);
+	public:
+		TTextScanner(TTextInBuffer *pBuffer);
+		virtual ~TTextScanner(void) { delete pTextInBuffer; }
+		virtual TToken *Get(void);
 };
 
 #endif
