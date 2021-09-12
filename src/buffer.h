@@ -1,9 +1,9 @@
 #ifndef buffer_h
-#define buffer
+#define buffer_h
 
 #include <fstream>
 #include <stdio.h>
-#include <string.h>
+#include <cstring>
 #include "misc.h"
 #include "error.h"
 

@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "common.h"
-#inclde "buffer.h"
 #include "error.h"
 #include "parser.h"
 
@@ -16,11 +15,11 @@ void TParser::Parse(void)
 			list.PutLine();
 			++errorCount;
 		}
-	} whie (token != tcEndOfFile);
+	} while (token != tcEndOfFile);
 
 	list.PutLine();
 	sprintf(list.text, "%20d soure lines.", currentLineNumber);
 	list.PutLine();
-	sprintf(list.text, "%20d syntax errors.", errorCout);
+	sprintf(list.text, "%20d syntax errors.", errorCount);
 	list.PutLine();
 }

@@ -5,7 +5,7 @@ TCharCode charCodeMap[128];
 TTextScanner::TTextScanner(TTextInBuffer *pBuffer)
 	: pTextInBuffer(pBuffer)
 {
-	in i;
+	int i;
 
 	// initialize character code map
 	for (i = 0; i <= 127; ++i) charCodeMap[i] = ccError;
@@ -32,7 +32,7 @@ void TTextScanner::SkipWhiteSpace(void)
 	char ch = pTextInBuffer->Char();
 
 	while (charCodeMap[ch] == ccWhiteSpace) {
-		ch = pTextInBuffer->GetChar()
+		ch = pTextInBuffer->GetChar();
 	};
 }
 
@@ -52,7 +52,7 @@ TToken *TTextScanner::Get(void)
 		case ccQuote:
 			pToken = &stringToken;
 			break;
-		case ccSpecial;
+		case ccSpecial:
 			pToken = &specialToken;
 			break;
 		case ccEndOfFile:
@@ -63,7 +63,7 @@ TToken *TTextScanner::Get(void)
 			break;
 	}
 
-	pToken->Get(*pTextInBuffer)
+	pToken->Get(*pTextInBuffer);
 
 	return pToken;
 }

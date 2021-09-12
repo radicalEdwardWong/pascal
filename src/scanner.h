@@ -2,23 +2,9 @@
 #define scanner_h
 
 #include "misc.h"
-#include "buffer.h"
 #include "token.h"
 
 class TScanner {
-	protected:
-		TWordToken wordToken;
-		TNumberToken numberToken;
-		TStringToken stringToken;
-		TSpecialToken specialToken;
-		TEOFToken eofToken;
-		TErrorToken erroToken;
-	public:
-		virtual ~TScanner(void) {}
-		virtual TToken *Get(void) = 0;
-};
-
-class TTextScanner : public TScanner {
 	protected:
 		TWordToken wordToken;
 		TNumberToken numberToken;
@@ -34,7 +20,7 @@ class TTextScanner : public TScanner {
 class TTextScanner : public TScanner {
 	private:
 		TTextInBuffer *const pTextInBuffer; // ptr to input text buffer to scan
-		void SkiWhiteSpace(void);
+		void SkipWhiteSpace(void);
 	public:
 		TTextScanner(TTextInBuffer *pBuffer);
 		virtual ~TTextScanner(void) { delete pTextInBuffer; }

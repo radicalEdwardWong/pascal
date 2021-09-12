@@ -2,7 +2,7 @@ CPPGNU = g++ -std=c++0x
 
 SOURCE = src/
 
-TARGET = list
+TARGET = tokenize1
 
 all: $(TARGET)
 

@@ -2,7 +2,6 @@
 #define parser_h
 
 #include "misc.h"
-#include "buffer.h"
 #include "token.h"
 #include "scanner.h"
 

@@ -46,17 +46,17 @@ class TNumberToken : public TToken {
 
 class TStringToken : public TToken {
 	public:
-		virtaul void Get(TTextInBuffer &buffer) {}
+		virtual void Get(TTextInBuffer &buffer) {}
 		virtual void Print(void) const {}
 };
 
 class TSpecialToken : public TToken {
 	public:
-		virtual void Get(TTexInBuffer &buffer);
+		virtual void Get(TTextInBuffer &buffer);
 		virtual void Print(void) const;
 };
 
-class TEOFToken : public Token {
+class TEOFToken : public TToken {
 	public:
 		TEOFToken(void) { code = tcEndOfFile; }
 		virtual void Get(TTextInBuffer &buffer) {}

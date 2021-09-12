@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 #include "token.h"
 
 void TWordToken::Get(TTextInBuffer &buffer)
@@ -8,13 +7,18 @@ void TWordToken::Get(TTextInBuffer &buffer)
 	char *ps = string;
 
 	do {
-		*ps++ = ch
+		*ps++ = ch;
 		ch = buffer.GetChar();
-	} while ( (charCodeMap[ch] == ccLettr)
+	} while ( (charCodeMap[ch] == ccLetter)
 		|| (charCodeMap[ch] == ccDigit ) );
 
 	*ps = '\0';
-	strlwr(string);
+
+	for (char &ch:string)
+    {
+          ch = tolower(ch);
+    }
+
 	code = tcWord;
 }
 
@@ -40,10 +44,12 @@ void TNumberToken::Get(TTextInBuffer &buffer)
 			value.integer = (10 * value.integer) + (ch - '0');
 		else // too many digits
 			countErrorFlag = true;
+
+		ch = buffer.GetChar();
 	} while (charCodeMap[ch] == ccDigit);
 
 	*ps = '\0';
-	code = countErrorFlag ? toError : toNumber;
+	code = countErrorFlag ? tcError : tcNumber;
 }
 
 void TNumberToken::Print(void) const
@@ -54,7 +60,7 @@ void TNumberToken::Print(void) const
 
 void TSpecialToken::Get(TTextInBuffer &buffer)
 {
-	char ch = bufferChar();
+	char ch = buffer.Char();
 	char *ps = string;
 
 	*ps++ = ch;
