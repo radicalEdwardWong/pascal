@@ -11,7 +11,16 @@ enum TCharCode {
 };
 
 enum TTokenCode {
-	tcDummy, tcWord, tcNumber, tcPeriod, tcEndOfFile, tcError,
+	tcDummy, TcIdentifier, tcNumber, tcString, tcEndOfFile, tcError,
+	tcUpArrow, tcStar, tcParen, tcRParen, tcMinus, tcPlus,
+	tcEqual, tcLBracet, tcRBracket, tcColon, tcSemicolon, tcLt,
+	tcNe, tcDotDot,
+
+	tcAND, tcARRAY, tcBEGIN, tcCASE, tcCONST, tcDIV,
+	tcDO, tcDOWNTO, tcELSE, tcEND, tcFILE, tcFOR, tcFUNCTION,
+	tcGOTO, tcIF, tcIN, tcLABEL, tcMOD, tcNIL, tcNOT, tcOF, tcOR,
+	tcACKED, tcPROCEDURE, tcPROGRAM, tcRECORD, tcREPEAT tcSET,
+	tcTHEN, tcTO, tcTYPE, tcUNTIL, tcVAR, tcWHLE, tcWITH,
 };
 
 enum TDataType {
