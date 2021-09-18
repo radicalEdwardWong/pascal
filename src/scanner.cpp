@@ -37,7 +37,7 @@ void TTextScanner::SkipWhiteSpace(void)
 		}
 		else if (ch == '{') {
 			do {
-				do = pTextInBuffer->GetChar();
+				ch = pTextInBuffer->GetChar();
 			} while ((ch != '}') && (ch != eofChar));
 
 			if (ch != eofChar)
@@ -45,7 +45,7 @@ void TTextScanner::SkipWhiteSpace(void)
 			else
 				Error(errUnexpectedEndOfFile);
 		}
-	while ((charCodeMap[ch] == ccWhiteSpace) || (ch == '{'));
+	} while ((charCodeMap[ch] == ccWhiteSpace) || (ch == '{'));
 }
 
 TToken *TTextScanner::Get(void)

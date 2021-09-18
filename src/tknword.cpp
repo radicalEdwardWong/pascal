@@ -1,6 +1,6 @@
 #include <string.h>
 #include <stdio.h>
-#include <token.h>
+#include "token.h"
 
 const int minResWordLen = 2;
 const int maxResWordLen = 9;
@@ -49,3 +49,56 @@ static TResWord rw8[] = {
 static TResWord rw9[] = {
 	{"procedure", tcPROCEDURE}, {NULL},
 };
+
+static TResWord *rwTable[] = {
+	NULL, NULL, rw2, rw3, rw4, rw5, rw6, rw7, rw8, rw9,
+};
+
+void TWordToken::Get(TTextInBuffer &buffer)
+{
+	extern TCharCode charCodeMap[];
+	char ch = buffer.Char();
+	char *ps = string;
+
+	do {
+		*ps++ = ch;
+		ch = buffer.GetChar();
+	} while( (charCodeMap[ch] == ccLetter)
+		|| (charCodeMap[ch] == ccDigit));
+
+	*ps = '\0';
+	strlwr(string);
+
+	CheckForReservedWord();
+}
+
+void TWordToken::CheckForReservedWord(void)
+{
+	int len = strlen(string);
+	TResWord *prw;
+
+	code = tcIdentifier;
+
+	if ((len >= minResWordLen) && (len <= maxResWordLen)) {
+		for (prw = rwTable[len]; prw->pString; ++prw) {
+			if (strcmp(string, prw->pString) == 0) {
+				code = prw->code;
+				break;
+			}
+		}
+	}
+}
+
+void TWordToken::Print(void) const
+{
+	if (code == tcIdentifier)
+	{
+		sprintf(list.text, "\t%-18s %-s", ">> identifier:", string);
+	}
+	else
+	{
+		sprintf(list.text, "\t%-18s %-s", ">> reserved word:", string);
+	}
+
+	list.PutLine();
+}

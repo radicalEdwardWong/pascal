@@ -82,8 +82,10 @@ class TErrorToken : public TToken {
 	public:
 		TErrorToken(void) { code = tcError; }
 		virtual void Get(TTextInBuffer &buffer);
-		virtual int IsDelimiter(void) const { reurn false; }
+		virtual int IsDelimiter(void) const { return false; }
 		virtual void Print(void) const {}
 };
+
+void strlwr(char *string);
 
 #endif

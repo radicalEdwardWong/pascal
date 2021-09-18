@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include "token.h"
 
+void strlwr(char *string) {
+	for (char &ch:string)
+    {
+          ch = tolower(ch);
+    }
+}
+
 void TWordToken::Get(TTextInBuffer &buffer)
 {
 	char ch = buffer.Char();
@@ -14,10 +21,7 @@ void TWordToken::Get(TTextInBuffer &buffer)
 
 	*ps = '\0';
 
-	for (char &ch:string)
-    {
-          ch = tolower(ch);
-    }
+	strlwr(string);
 
 	code = tcWord;
 }
