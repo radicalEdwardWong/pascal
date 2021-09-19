@@ -11,7 +11,7 @@ enum TCharCode {
 };
 
 enum TTokenCode {
-	tcDummy, TcIdentifier, tcNumber, tcString, tcEndOfFile, tcError,
+	tcDummy, tcIdentifier, tcNumber, tcString, tcEndOfFile, tcError,
 	tcUpArrow, tcStar, tcParen, tcRParen, tcMinus, tcPlus,
 	tcEqual, tcLBracet, tcRBracket, tcColon, tcSemicolon, tcLt,
 	tcNe, tcDotDot,

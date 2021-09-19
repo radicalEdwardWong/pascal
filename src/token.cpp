@@ -2,10 +2,10 @@
 #include "token.h"
 
 void strlwr(char *string) {
-	for (char &ch:string)
-    {
-          ch = tolower(ch);
-    }
+	char *ch = string;
+	do {
+		*ch = (char)tolower((int)*ch);
+	} while (*ch++ != '\0');
 }
 
 void TWordToken::Get(TTextInBuffer &buffer)

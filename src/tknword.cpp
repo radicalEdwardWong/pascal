@@ -6,7 +6,7 @@ const int minResWordLen = 2;
 const int maxResWordLen = 9;
 
 struct TResWord {
-	char *pString;
+	const char *pString;
 	TTokenCode code;
 };
 
