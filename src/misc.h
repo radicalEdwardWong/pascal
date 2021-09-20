@@ -14,6 +14,7 @@ enum TTokenCode {
 	tcDummy, tcIdentifier, tcNumber, tcString, tcEndOfFile, tcError,
 	tcUpArrow, tcStar, tcParen, tcRParen, tcMinus, tcPlus,
 	tcEqual, tcLBracet, tcRBracket, tcColon, tcSemicolon, tcLt,
+	tcGt, tcComma, tcPeriod, tcSlash, tcColonEqual, tcLe, tcGe,
 	tcNe, tcDotDot,
 
 	tcAND, tcARRAY, tcBEGIN, tcCASE, tcCONST, tcDIV,
