@@ -32,24 +32,6 @@ void TWordToken::Print(void) const
 	list.PutLine();
 }
 
-void TSpecialToken::Get(TTextInBuffer &buffer)
-{
-	char ch = buffer.Char();
-	char *ps = string;
-
-	*ps++ = ch;
-	*ps = '\0';
-	buffer.GetChar();
-
-	code = (ch == '.') ? tcPeriod : tcError;
-}
-
-void TSpecialToken::Print(void) const
-{
-	sprintf(list.text, "\t%-18s %-s", ">> special:", string);
-	list.PutLine();
-}
-
 /* extract an invalid character from the source */
 void TErrorToken::Get(TTextInBuffer &buffer)
 {
