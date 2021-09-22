@@ -12,7 +12,7 @@ void TStringToken::Get(TTextInBuffer &buffer)
 	while (ch != eof) {
 		if (ch == '\'')
 		{ // another quote
-			// check for adjacent quote (two single quotes = ")
+			// check for adjacent quote, for escaped single quote ('' => ')
 			ch = buffer.GetChar();
 			if (ch != '\'') // previous quote ended string
 				break;
