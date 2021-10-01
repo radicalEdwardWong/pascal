@@ -3,7 +3,7 @@
 #include <math.h>
 #include "token.h"
 
-void TNumberToken::Get(TTextInBuffer *buffer)
+void NumberToken::Get(TextInBuffer *buffer)
 {
 	const int maxInteger = 32767;
 	const int maxExponent = 37;
@@ -106,7 +106,7 @@ void TNumberToken::Get(TTextInBuffer *buffer)
 	code = tcNumber;
 }
 
-int TNumberToken::AccumulateValue(TTextInBuffer &buffer,
+int NumberToken::AccumulateValue(TextInBuffer &buffer,
 								float &value, TerrorCode ec) {
 	const int maxDigitCount = 20;
 
@@ -132,7 +132,7 @@ int TNumberToken::AccumulateValue(TTextInBuffer &buffer,
 	return true; // success (^.^)-b
 }
 
-void TNumberToken::Print(void) const
+void NumberToken::Print(void) const
 {
 	if (type == tyInteger)
 		sprintf(list.text, "\t%-18s =%d", ">> integer:", value.integer);

@@ -5,16 +5,16 @@
 #include "error.h"
 #include "buffer.h"
 
-extern TCharCode charCodeMap[];
+extern CharCode charCodeMap[];
 
-class TToken {
+class Token {
 	protected:
-		TTokenCode code;
-		TDataType type;
-		TDataValue value;
+		TokenCode code;
+		DataType type;
+		DataValue value;
 		char string[maxInputBufferSize];
 	public:
-		TToken(void)
+		Token(void)
 		{
 			code = tcDummy;
 			type = tyDummy;
@@ -22,66 +22,66 @@ class TToken {
 			string[0] = '\0';
 		}
 
-		TTokenCode Code() const { return code; }
-		TDataType Type() const { return type; }
-		TDataValue Value() const { return value; }
+		TokenCode Code() const { return code; }
+		DataType Type() const { return type; }
+		DataValue Value() const { return value; }
 		char *String() { return string; }
 
-		virtual void Get(TTextInBuffer &buffer) = 0;
+		virtual void Get(TextInBuffer &buffer) = 0;
 		virtual int IsDelimiter(void) const = 0;
 		virtual void Print(void) const = 0;
 };
 
-class TWordToken : public TToken {
+class WordToken : public Token {
 	private:
 		void CheckForReservedWord(void);
 	public:
-		virtual void Get(TTextInBuffer &buffer);
+		virtual void Get(TextInBuffer &buffer);
 		virtual int IsDelimiter(void) const { return false; }
 		virtual void Print(void) const;
 };
 
-class TNumberToken : public TToken {
+class NumberToken : public Token {
 	private:
 		char ch;
 		char *ps;
 		int digitCount;
 		int countErrorFlag;
-		int AccumulateValue(TTextInBuffer &buffer, float &value, TErrorCode ec);
+		int AccumulateValue(TextInBuffer &buffer, float &value, ErrorCode ec);
 	public:
-		TNumberToken(void) { code = tcNumber; }
-		virtual void Get(TTextInBuffer &buffer);
+		NumberToken(void) { code = tcNumber; }
+		virtual void Get(TextInBuffer &buffer);
 		virtual int IsDelimiter(void) const { return false; }
 		virtual void Print(void) const;
 };
 
-class TStringToken : public TToken {
+class StringToken : public Token {
 	public:
-		TStringToken() { code = tcString; }
-		virtual void Get(TTextInBuffer &buffer);
+		StringToken() { code = tcString; }
+		virtual void Get(TextInBuffer &buffer);
 		virtual int IsDelimiter(void) const { return true; }
 		virtual void Print(void) const;
 };
 
-class TSpecialToken : public TToken {
+class SpecialToken : public Token {
 	public:
-		virtual void Get(TTextInBuffer &buffer);
+		virtual void Get(TextInBuffer &buffer);
 		virtual int IsDelimiter(void) const { return true; }
 		virtual void Print(void) const;
 };
 
-class TEOFToken : public TToken {
+class EOFToken : public Token {
 	public:
-		TEOFToken(void) { code = tcEndOfFile; }
-		virtual void Get(TTextInBuffer &buffer) {}
+		EOFToken(void) { code = tcEndOfFile; }
+		virtual void Get(TextInBuffer &buffer) {}
 		virtual int IsDelimiter(void) const { return false; }
 		virtual void Print(void) const {}
 };
 
-class TErrorToken : public TToken {
+class ErrorToken : public Token {
 	public:
-		TErrorToken(void) { code = tcError; }
-		virtual void Get(TTextInBuffer &buffer);
+		ErrorToken(void) { code = tcError; }
+		virtual void Get(TextInBuffer &buffer);
 		virtual int IsDelimiter(void) const { return false; }
 		virtual void Print(void) const {}
 };

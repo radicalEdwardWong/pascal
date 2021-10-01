@@ -3,7 +3,7 @@
 #include "error.h"
 #include "parser.h"
 
-void TParser::Parse(void)
+void Parser::Parse(void)
 {
 	// Loop to extract and print tokens
 	// until the end of the source file.

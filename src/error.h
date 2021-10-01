@@ -5,7 +5,7 @@ extern int errorCount;
 extern int errorArrowFlag;
 extern int errorArrowOffset;
 
-enum TAbortCode {
+enum AbortCode {
 	abortInvalidCommandLineArgs = -1,
 	abortSourceFileOpenFailed = -2,
 	abortIFormFileOpenFailed = -3,
@@ -18,9 +18,9 @@ enum TAbortCode {
 	abortUnimplementedFeature = -10,
 };
 
-void AbortTranslation(TAbortCode ac);
+void AbortTranslation(AbortCode ac);
 
-enum TErrorCode {
+enum ErrorCode {
 	errNone,
 	errUnrecognizable,
 	errTooMany,
@@ -77,6 +77,6 @@ enum TErrorCode {
 	errWrongNumberOfParms
 };
 
-void Error(TErrorCode ec);
+void Error(ErrorCode ec);
 
 #endif

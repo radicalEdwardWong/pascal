@@ -16,7 +16,7 @@ extern int level;
 
 const int maxInputBufferSize = 256;
 
-class TTextInBuffer
+class TextInBuffer
 {
 	protected:
 		fstream file; // input text file
@@ -27,9 +27,9 @@ class TTextInBuffer
 		virtual char GetLine(void) = 0;
 
 	public:
-		TTextInBuffer(const char *pInputFileName, TAbortCode ac);
+		TextInBuffer(const char *pInputFileName, AbortCode ac);
 
-		virtual ~TTextInBuffer(void)
+		virtual ~TextInBuffer(void)
 		{
 			file.close();
 			delete pFileName;
@@ -40,16 +40,16 @@ class TTextInBuffer
 		char PutBackChar(void);
 };
 
-class TSourceBuffer : public TTextInBuffer {
+class SourceBuffer : public TextInBuffer {
 	private:
 		virtual char GetLine(void);
 
 	public:
-		TSourceBuffer(const char *pSourceFileName);
+		SourceBuffer(const char *pSourceFileName);
 };
 
 
-class TTextOutBuffer {
+class TextOutBuffer {
 	public:
 		char text[maxInputBufferSize + 16]; // output text buffer
 
@@ -63,7 +63,7 @@ class TTextOutBuffer {
 		
 };
 
-class TListBuffer : public TTextOutBuffer
+class ListBuffer : public TextOutBuffer
 {
 	private:
 		char *pSourceFileName; // ptr to source file name (for page header)
@@ -74,14 +74,14 @@ class TListBuffer : public TTextOutBuffer
 		void PrintPageHeader(void);
 
 	public:
-		virtual ~TListBuffer(void) { delete pSourceFileName; }
+		virtual ~ListBuffer(void) { delete pSourceFileName; }
 
 		void Initialize(const char *fileName);
 		virtual void PutLine(void);
 
 		void PutLine(const char *pText)
 		{
-			TTextOutBuffer::PutLine(pText);
+			TextOutBuffer::PutLine(pText);
 		}
 
 		void PutLine(const char *pText, int lineNumber, int nestingLevel)
@@ -91,6 +91,6 @@ class TListBuffer : public TTextOutBuffer
 		}
 };
 
-extern TListBuffer list;
+extern ListBuffer list;
 
 #endif

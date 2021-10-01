@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 		AbortTranslation(abortInvalidCommandLineArgs);
 	}
 
-	TSourceBuffer source(argv[1]);
+	SourceBuffer source(argv[1]);
 
 	do
 	{

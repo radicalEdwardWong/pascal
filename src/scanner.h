@@ -4,27 +4,27 @@
 #include "misc.h"
 #include "token.h"
 
-class TScanner {
+class Scanner {
 	protected:
-		TWordToken wordToken;
-		TNumberToken numberToken;
-		TStringToken stringToken;
-		TSpecialToken specialToken;
-		TEOFToken eofToken;
-		TErrorToken errorToken;
+		WordToken wordToken;
+		NumberToken numberToken;
+		StringToken stringToken;
+		SpecialToken specialToken;
+		EOFToken eofToken;
+		ErrorToken errorToken;
 	public:
-		virtual ~TScanner(void) {}
-		virtual TToken *Get(void) = 0;
+		virtual ~Scanner(void) {}
+		virtual Token *Get(void) = 0;
 };
 
-class TTextScanner : public TScanner {
+class TextScanner : public Scanner {
 	private:
-		TTextInBuffer *const pTextInBuffer; // ptr to input text buffer to scan
+		TextInBuffer *const pTextInBuffer; // ptr to input text buffer to scan
 		void SkipWhiteSpace(void);
 	public:
-		TTextScanner(TTextInBuffer *pBuffer);
-		virtual ~TTextScanner(void) { delete pTextInBuffer; }
-		virtual TToken *Get(void);
+		TextScanner(TextInBuffer *pBuffer);
+		virtual ~TextScanner(void) { delete pTextInBuffer; }
+		virtual Token *Get(void);
 };
 
 #endif

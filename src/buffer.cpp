@@ -14,7 +14,7 @@ int listFlag = true; // true if list source line, else false
  * ac: abort code to use if open failed
  */
 
-TTextInBuffer::TTextInBuffer(const char *pInputFileName, TAbortCode ac)
+TextInBuffer::TextInBuffer(const char *pInputFileName, AbortCode ac)
 	: pFileName(new char[strlen(pInputFileName) + 1])
 {
 	strcpy(pFileName, pInputFileName);
@@ -31,7 +31,7 @@ TTextInBuffer::TTextInBuffer(const char *pInputFileName, TAbortCode ac)
  * Return: next character from the source file or the end-of-file
  * character
  */
-char TTextInBuffer::GetChar(void)
+char TextInBuffer::GetChar(void)
 {
 	const int tabSize = 4;
 	char ch; // character to return
@@ -59,7 +59,7 @@ char TTextInBuffer::GetChar(void)
  * character (only used to put back a '.')
  * Return: the previous character
  */
-char TTextInBuffer::PutBackChar(void)
+char TextInBuffer::PutBackChar(void)
 {
 	--pChar;
 	--inputPosition;
@@ -72,8 +72,8 @@ char TTextInBuffer::PutBackChar(void)
  * source file.
  * pSourceFileName: ptr to name of source file
  */
-TSourceBuffer::TSourceBuffer(const char *pSourceFileName)
-	: TTextInBuffer(pSourceFileName, abortSourceFileOpenFailed)
+SourceBuffer::TSourceBuffer(const char *pSourceFileName)
+	: TextInBuffer(pSourceFileName, abortSourceFileOpenFailed)
 {
 	if (listFlag)
 		list.Initialize(pSourceFileName);
@@ -87,7 +87,7 @@ TSourceBuffer::TSourceBuffer(const char *pSourceFileName)
  * character if at the end of the file
  */
 
-char TSourceBuffer::GetLine(void)
+char SourceBuffer::GetLine(void)
 {
 	extern int lineNumber, currentNestingLevel;
 
@@ -109,9 +109,9 @@ char TSourceBuffer::GetLine(void)
 const int maxPrintLineLength = 80;
 const int maxLinesPerPage = 50;
 
-TListBuffer list;
+ListBuffer list;
 
-void TListBuffer::PrintPageHeader(void)
+void ListBuffer::PrintPageHeader(void)
 {
 	const char formFeedChar = '\f';
 
@@ -126,7 +126,7 @@ void TListBuffer::PrintPageHeader(void)
  * and print the first header.
  * pFileName: ptr to source (for page header)
  */
-void TListBuffer::Initialize(const char *pFileName)
+void ListBuffer::Initialize(const char *pFileName)
 {
 	text[0] = '\0';
 	pageNumber = 0;
@@ -140,7 +140,7 @@ void TListBuffer::Initialize(const char *pFileName)
 	date[strlen(date) - 1] = '\0'; // remove '\n' at end
 }
 
-void TListBuffer::PutLine(void)
+void ListBuffer::PutLine(void)
 {
 	if (listFlag && (lineCount == maxLinesPerPage))
 		PrintPageHeader();

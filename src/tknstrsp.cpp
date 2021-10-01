@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "token.h"
 
-void TStringToken::Get(TTextInBuffer &buffer)
+void StringToken::Get(TextInBuffer &buffer)
 {
 	char ch; // current character
 	char *ps = string; // ptr to char in string
@@ -31,13 +31,13 @@ void TStringToken::Get(TTextInBuffer &buffer)
 	*ps = '\0';
 }
 
-void TStringToken::Print(void) const
+void StringToken::Print(void) const
 {
 	sprintf(list.text, "\t%-18s %-s", ">> string:", string);
 	list.PutLine();
 }
 
-void TSpecialToken::Get(TTextInBuffer &buffer)
+void SpecialToken::Get(TextInBuffer &buffer)
 {
 	char ch = buffer.Char();
 	char *ps = string;
@@ -156,13 +156,13 @@ void TSpecialToken::Get(TTextInBuffer &buffer)
 	*ps = '\0';
 }
 
-void TSpecialToken::Print(void) const
+void SpecialToken::Print(void) const
 {
 	sprintf(list.text, "\t&-18s %-s", ">> special:", string);
 	list.PutLine();
 }
 
-void TErrorToken::Get((TTextInBuffer &buffer)
+void ErrorToken::Get((TextInBuffer &buffer)
 {
 	string[0] = buffer.Char();
 	string[1] = '\0';

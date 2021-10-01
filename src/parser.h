@@ -5,11 +5,11 @@
 #include "token.h"
 #include "scanner.h"
 
-class TParser {
+class Parser {
 	private:
-		TTextScanner *const pScanner;
-		TToken *pToken;
-		TTokenCode token;
+		TextScanner *const pScanner;
+		Token *pToken;
+		TokenCode token;
 		TCompactListBuffer *const pCompact;
 	
 		void GetToken(void)
@@ -19,11 +19,11 @@ class TParser {
 		}
 
 	public:
-		TParser(TTextInBuffer *pBuffer)
-			: pScanner(new TTextScanner(pBuffer)),
+		Parser(TextInBuffer *pBuffer)
+			: pScanner(new TextScanner(pBuffer)),
 			pCompact(new TCompactListBuffer) {}
 
-		~TParser(void)
+		~Parser(void)
 		{
 			delete pScanner;
 			delete pCompact;

@@ -1,8 +1,8 @@
 #include "scanner.h"
 
-TCharCode charCodeMap[128];
+CharCode charCodeMap[128];
 
-TTextScanner::TTextScanner(TTextInBuffer *pBuffer)
+TextScanner::TTextScanner(TextInBuffer *pBuffer)
 	: pTextInBuffer(pBuffer)
 {
 	int i;
@@ -27,7 +27,7 @@ TTextScanner::TTextScanner(TTextInBuffer *pBuffer)
 	charCodeMap[eofChar] = ccEndOfFile;
 }
 
-void TTextScanner::SkipWhiteSpace(void)
+void TextScanner::SkipWhiteSpace(void)
 {
 	char ch = pTextInBuffer->Char();
 
@@ -48,9 +48,9 @@ void TTextScanner::SkipWhiteSpace(void)
 	} while ((charCodeMap[ch] == ccWhiteSpace) || (ch == '{'));
 }
 
-TToken *TTextScanner::Get(void)
+Token *TextScanner::Get(void)
 {
-	TToken *pToken;
+	Token *pToken;
 
 	SkipWhiteSpace();
 

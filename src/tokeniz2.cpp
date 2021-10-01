@@ -11,6 +11,6 @@ void main(int argc, char *argv[])
 		AbortTranslation(abortInvalidCommandLineArgs);
 	}
 
-	TParser parser(new TSourceBuffer(argc[1]));
+	Parser parser(new SourceBuffer(argc[1]));
 	parser.Parse();
 }

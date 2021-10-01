@@ -6,11 +6,11 @@ const int false = 0;
 const int true = 1;
 */
 
-enum TCharCode {
+enum CharCode {
 	ccLetter, ccDigit, ccSpecial, ccQuote, ccWhiteSpace, ccEndOfFile, ccError,
 };
 
-enum TTokenCode {
+enum TokenCode {
 	tcDummy, tcIdentifier, tcNumber, tcString, tcEndOfFile, tcError,
 	tcUpArrow, tcStar, tcParen, tcRParen, tcMinus, tcPlus,
 	tcEqual, tcLBracet, tcRBracket, tcColon, tcSemicolon, tcLt,
@@ -24,11 +24,11 @@ enum TTokenCode {
 	tcTHEN, tcTO, tcTYPE, tcUNTIL, tcVAR, tcWHILE, tcWITH,
 };
 
-enum TDataType {
-	tyDummy, tyInteger, tyReal, TyCharacter, tyString,
+enum DataType {
+	tyDummy, tyInteger, tyReal, tyCharacter, tyString,
 };
 
-union TDataValue {
+union DataValue {
 	int integer;
 	float real;
 	char character;

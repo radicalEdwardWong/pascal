@@ -9,7 +9,7 @@ void strlwr(char *string) {
 }
 
 /* extract an invalid character from the source */
-void TErrorToken::Get(TTextInBuffer &buffer)
+void ErrorToken::Get(TextInBuffer &buffer)
 {
 	string[0] = buffer.Char();
 	string[1] = '\0';

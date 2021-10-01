@@ -5,58 +5,58 @@
 const int minResWordLen = 2;
 const int maxResWordLen = 9;
 
-struct TResWord {
+struct ResWord {
 	const char *pString;
-	TTokenCode code;
+	TokenCode code;
 };
 
-static TResWord rw2[] = {
+static ResWord rw2[] = {
 	{"do", tcDO}, {"if", tcIF}, {"in", tcIN}, {"of", tcOF},
 	{"or", tcOR}, {"to", tcTO}, {NULL},
 };
 
-static TResWord rw3[] = {
+static ResWord rw3[] = {
 	{"and", tcAND}, {"div", tcDIV}, {"end", tcEND}, {"for", tcFOR},
 	{"mod", tcMOD}, {"nil", tcNIL}, {"not", tcNOT}, {"set", tcSET},
 	{"var", tcVAR}, {NULL},
 };
 
-static TResWord rw4[] = {
+static ResWord rw4[] = {
 	{"case", tcCASE}, {"els", tcELSE}, {"file", tcFILE},
 	{"goto", tcGOTO}, {"then", tcTHEN}, {"type", tcTYPE},
 	{"with", tcWITH}, {NULL},
 };
 
-static TResWord rw5[] = {
+static ResWord rw5[] = {
 	{"array", tcARRAY}, {"begin", tcBEGIN}, {"const", tcCONST},
 	{"label", tcLABEL}, {"until", tcUNTIL}, {"while", tcWHILE},
 	{NULL},
 };
 
-static TResWord rw6[] = {
+static ResWord rw6[] = {
 	{"downto", tcDOWNTO}, {"packed", tcPACKED}, {"record", tcRECORD},
 	{"repeat", tcREPEAT}, {NULL},
 };
 
-static TResWord rw7[] = {
+static ResWord rw7[] = {
 	{"program", tcPROGRAM}, {NULL},
 };
 
-static TResWord rw8[] = {
+static ResWord rw8[] = {
 	{"function", tcFUNCTION}, {NULL},
 };
 
-static TResWord rw9[] = {
+static ResWord rw9[] = {
 	{"procedure", tcPROCEDURE}, {NULL},
 };
 
-static TResWord *rwTable[] = {
+static ResWord *rwTable[] = {
 	NULL, NULL, rw2, rw3, rw4, rw5, rw6, rw7, rw8, rw9,
 };
 
-void TWordToken::Get(TTextInBuffer &buffer)
+void WordToken::Get(TextInBuffer &buffer)
 {
-	extern TCharCode charCodeMap[];
+	extern CharCode charCodeMap[];
 	char ch = buffer.Char();
 	char *ps = string;
 
@@ -72,10 +72,10 @@ void TWordToken::Get(TTextInBuffer &buffer)
 	CheckForReservedWord();
 }
 
-void TWordToken::CheckForReservedWord(void)
+void WordToken::CheckForReservedWord(void)
 {
 	int len = strlen(string);
-	TResWord *prw;
+	ResWord *prw;
 
 	code = tcIdentifier;
 
@@ -89,7 +89,7 @@ void TWordToken::CheckForReservedWord(void)
 	}
 }
 
-void TWordToken::Print(void) const
+void WordToken::Print(void) const
 {
 	if (code == tcIdentifier)
 	{

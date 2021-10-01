@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 		AbortTranslation(abortInvalidCommandLineArgs);
 	}
 
-	TParser parser(new TSourceBuffer(argv[1]));
+	Parser parser(new SourceBuffer(argv[1]));
 	parser.Parse();
 	return 0;
 }

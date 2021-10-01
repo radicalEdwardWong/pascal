@@ -28,7 +28,7 @@ static const char *abortMsg[] = {
  * Print the abort code to the error file and then exit.
  * ac: abort code
  */
-void AbortTranslation(TAbortCode ac)
+void AbortTranslation(AbortCode ac)
 {
 	cerr << "** Fatal translator error: " << abortMsg[~ac] << endl;
 	exit(ac);
@@ -96,7 +96,7 @@ static char *errorMessages[] = {
 	"Unimplemented feature",
 };
 
-void Error(TErrorCode ec)
+void Error(ErrorCode ec)
 {
 	const in maxSyntaxErrors = 25;
 
