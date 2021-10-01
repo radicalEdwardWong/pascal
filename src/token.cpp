@@ -8,30 +8,6 @@ void strlwr(char *string) {
 	} while (*ch++ != '\0');
 }
 
-void TWordToken::Get(TTextInBuffer &buffer)
-{
-	char ch = buffer.Char();
-	char *ps = string;
-
-	do {
-		*ps++ = ch;
-		ch = buffer.GetChar();
-	} while ( (charCodeMap[ch] == ccLetter)
-		|| (charCodeMap[ch] == ccDigit ) );
-
-	*ps = '\0';
-
-	strlwr(string);
-
-	code = tcWord;
-}
-
-void TWordToken::Print(void) const
-{
-	sprintf(list.text, "\t%-18s %-s", ">> word:", string);
-	list.PutLine();
-}
-
 /* extract an invalid character from the source */
 void TErrorToken::Get(TTextInBuffer &buffer)
 {

@@ -10,20 +10,24 @@ class TParser {
 		TTextScanner *const pScanner;
 		TToken *pToken;
 		TTokenCode token;
+		TCompactListBuffer *const pCompact;
 	
 		void GetToken(void)
 		{
 			pToken = pScanner->Get();
 			token = pToken->Code();
 		}
+
 	public:
 		TParser(TTextInBuffer *pBuffer)
-			: pScanner(new TTextScanner(pBuffer)) {}
+			: pScanner(new TTextScanner(pBuffer)),
+			pCompact(new TCompactListBuffer) {}
 
-		~TParser(void) { delete pScanner; }
-
-		void Parse(void);
+		~TParser(void)
+		{
+			delete pScanner;
+			delete pCompact;
+		}
 };
-
 
 #endif
