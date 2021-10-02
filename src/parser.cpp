@@ -5,17 +5,30 @@
 
 void Parser::Parse(void)
 {
-	// Loop to extract and print tokens
-	// until the end of the source file.
+	int currIsDelimiter;
+	int prevIsDelimiter = true;
+
 	do {
 		GetToken();
-		if (token != tcError)
-			pToken->Print();
-	} while (token != tcEndOfFile);
 
-	list.PutLine();
-	sprintf(list.text, "%20d source lines.", currentLineNumber);
-	list.PutLine();
-	sprintf(list.text, "%20d syntax errors.", errorCount);
-	list.PutLine();
+		if (token == tcEndOfFile) {
+			Error(errUnexpectedEndOfFile);
+			break;
+		}
+
+		if (token != tcError) {
+			currIsDelimiter = pToken->IsDelimiter();
+
+			if (!prevIsDelimiter && !currIsDelimiter) {
+				pCompact->PutBlank();
+			}
+			pCompact->Put(pToken->String());
+
+			prevIsDelimiter = currIsDelimiter;
+		}
+		else
+			Error(errUnrecognizable);
+	} while (token != tcPeriod);
+
+	pCompact->PutLine();
 }
