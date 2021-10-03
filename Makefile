@@ -2,7 +2,7 @@ CPPGNU = g++ -std=c++0x
 
 SOURCE = src/
 
-TARGET = tokenize1
+TARGET = compact
 
 all: $(TARGET)
 
