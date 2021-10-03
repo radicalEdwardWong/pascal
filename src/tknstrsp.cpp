@@ -139,7 +139,7 @@ void SpecialToken::Get(TextInBuffer &buffer)
 			if (ch == '.')
 			{
 				*ps++ = '.';
-				code = tcDogDot;
+				code = tcDotDot;
 				buffer.GetChar();
 			}
 			else
@@ -158,11 +158,11 @@ void SpecialToken::Get(TextInBuffer &buffer)
 
 void SpecialToken::Print(void) const
 {
-	sprintf(list.text, "\t&-18s %-s", ">> special:", string);
+	sprintf(list.text, "\t%-18s %-s", ">> special:", string);
 	list.PutLine();
 }
 
-void ErrorToken::Get((TextInBuffer &buffer)
+void ErrorToken::Get(TextInBuffer &buffer)
 {
 	string[0] = buffer.Char();
 	string[1] = '\0';

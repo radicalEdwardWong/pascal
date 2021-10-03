@@ -72,7 +72,7 @@ char TextInBuffer::PutBackChar(void)
  * source file.
  * pSourceFileName: ptr to name of source file
  */
-SourceBuffer::TSourceBuffer(const char *pSourceFileName)
+SourceBuffer::SourceBuffer(const char *pSourceFileName)
 	: TextInBuffer(pSourceFileName, abortSourceFileOpenFailed)
 {
 	if (listFlag)

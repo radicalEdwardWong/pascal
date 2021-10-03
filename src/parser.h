@@ -4,13 +4,14 @@
 #include "misc.h"
 #include "token.h"
 #include "scanner.h"
+#include "complist.h"
 
 class Parser {
 	private:
 		TextScanner *const pScanner;
 		Token *pToken;
 		TokenCode token;
-		TCompactListBuffer *const pCompact;
+		CompactListBuffer *const pCompact;
 	
 		void GetToken(void)
 		{
@@ -21,7 +22,7 @@ class Parser {
 	public:
 		Parser(TextInBuffer *pBuffer)
 			: pScanner(new TextScanner(pBuffer)),
-			pCompact(new TCompactListBuffer) {}
+			pCompact(new CompactListBuffer) {}
 
 		~Parser(void)
 		{

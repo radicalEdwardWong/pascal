@@ -1,5 +1,8 @@
+#include <iostream>
 #include <string.h>
 #include "complist.h"
+
+using namespace std;
 
 void CompactListBuffer::PutBlank(void)
 {

@@ -1,9 +1,11 @@
-#include <iostream.h>
+#include <iostream>
 #include "error.h"
 #include "buffer.h"
 #include "parser.h"
 
-void main(int argc, char *argv[])
+using namespace std;
+
+int main(int argc, char *argv[])
 {
 	if (argc != 2) {
 		cerr << "Usage: compact <source file>" << endl;
@@ -14,6 +16,6 @@ void main(int argc, char *argv[])
 	errorArrowFlag = false; // don't print arrows under syntax errors
 	listFlag = false; // don't list the source file
 
-	parser parser(new SourceBuffer(argc[1]));
+	Parser parser(new SourceBuffer(argc[1]));
 	parser.Parse();
 }

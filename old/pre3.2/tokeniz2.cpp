@@ -1,4 +1,4 @@
-#include <iostream.h>
+#include <iostream>
 #include "error.h"
 #include "buffer.h"
 #include "parser.h"

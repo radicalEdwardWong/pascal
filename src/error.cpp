@@ -34,7 +34,7 @@ void AbortTranslation(AbortCode ac)
 	exit(ac);
 }
 
-static char *errorMessages[] = {
+static const char *errorMessages[] = {
 	"No error",
 	"Unrecognizable input",
 	"Too many syntax errors",
@@ -71,7 +71,7 @@ static char *errorMessages[] = {
 	"Invalid type",
 	"Not a type identifier",
 	"Invalid subrange type",
-	Not a constant idenfitier",
+	"Not a constant idenfitier",
 	"Missing ..",
 	"Incompatible types",
 	"Invalid assignement target",
