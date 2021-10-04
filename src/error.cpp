@@ -98,7 +98,7 @@ static const char *errorMessages[] = {
 
 void Error(ErrorCode ec)
 {
-	const in maxSyntaxErrors = 25;
+	const int maxSyntaxErrors = 25;
 
 	int errorPosition = errorArrowOffset + inputPosition - 1;
 

@@ -4,6 +4,7 @@
 #include "misc.h"
 #include "error.h"
 #include "buffer.h"
+#include "str.h"
 
 extern CharCode charCodeMap[];
 
@@ -85,7 +86,5 @@ class ErrorToken : public Token {
 		virtual int IsDelimiter(void) const { return false; }
 		virtual void Print(void) const {}
 };
-
-void strlwr(char *string);
 
 #endif

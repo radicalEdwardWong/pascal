@@ -2,7 +2,7 @@
 
 CharCode charCodeMap[128];
 
-TextScanner::TTextScanner(TextInBuffer *pBuffer)
+TextScanner::TextScanner(TextInBuffer *pBuffer)
 	: pTextInBuffer(pBuffer)
 {
 	int i;

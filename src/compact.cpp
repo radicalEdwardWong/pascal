@@ -16,6 +16,6 @@ int main(int argc, char *argv[])
 	errorArrowFlag = false; // don't print arrows under syntax errors
 	listFlag = false; // don't list the source file
 
-	Parser parser(new SourceBuffer(argc[1]));
+	Parser parser(new SourceBuffer(argv[1]));
 	parser.Parse();
 }

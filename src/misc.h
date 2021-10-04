@@ -12,8 +12,8 @@ enum CharCode {
 
 enum TokenCode {
 	tcDummy, tcIdentifier, tcNumber, tcString, tcEndOfFile, tcError,
-	tcUpArrow, tcStar, tcParen, tcRParen, tcMinus, tcPlus,
-	tcEqual, tcLBracet, tcRBracket, tcColon, tcSemicolon, tcLt,
+	tcUpArrow, tcStar, tcLParen, tcRParen, tcMinus, tcPlus,
+	tcEqual, tcLBracket, tcRBracket, tcColon, tcSemicolon, tcLt,
 	tcGt, tcComma, tcPeriod, tcSlash, tcColonEqual, tcLe, tcGe,
 	tcNe, tcDotDot,
 

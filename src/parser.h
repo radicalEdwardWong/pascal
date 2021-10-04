@@ -29,6 +29,8 @@ class Parser {
 			delete pScanner;
 			delete pCompact;
 		}
+
+		void Parse(void);
 };
 
 #endif

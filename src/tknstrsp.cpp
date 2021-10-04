@@ -6,10 +6,10 @@ void StringToken::Get(TextInBuffer &buffer)
 	char ch; // current character
 	char *ps = string; // ptr to char in string
 
-	*ps++ = '\''; / opening quote
+	*ps++ = '\''; // opening quote
 
 	ch = buffer.GetChar();
-	while (ch != eof) {
+	while (ch != eofChar) {
 		if (ch == '\'')
 		{ // another quote
 			// check for adjacent quote, for escaped single quote ('' => ')
@@ -46,7 +46,7 @@ void SpecialToken::Get(TextInBuffer &buffer)
 
 	switch (ch) {
 		case '^':
-			code = tcUpArror;
+			code = tcUpArrow;
 			buffer.GetChar();
 			break;
 		case '*':

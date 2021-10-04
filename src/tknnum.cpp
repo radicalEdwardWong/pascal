@@ -3,17 +3,18 @@
 #include <math.h>
 #include "token.h"
 
-void NumberToken::Get(TextInBuffer *buffer)
+void NumberToken::Get(TextInBuffer &buffer)
 {
 	const int maxInteger = 32767;
 	const int maxExponent = 37;
 
 	float numValue = 0.0; // value ignoring the decimal point
 	int wholePlaces = 0; // digits before the decimal point
+	int decimalPlaces = 0; // digits after the decimal point
 	char exponentSign = '+';
 	float eValue = 0.0; // value of number after 'E'
 	int exponent = 0; // final value of exponent
-	int sawDotDotFalag = false; // true of encountered '..', else false
+	int sawDotDotFlag = false; // true of encountered '..', else false
 
 	ch = buffer.Char();
 	ps = string;
@@ -54,7 +55,7 @@ void NumberToken::Get(TextInBuffer *buffer)
 
 	// Get the exponent part, if any. There cannot be an exponent
 	// part if we already saw the '..' token.
-	if (!sawDotDotFlag && ((ch == 'E') || (ch == 'e')) {
+	if (!sawDotDotFlag && ((ch == 'E') || (ch == 'e'))) {
 		type = tyReal;
 		*ps++ = ch;
 		ch = buffer.GetChar();
@@ -86,7 +87,7 @@ void NumberToken::Get(TextInBuffer *buffer)
 	if ((exponent + wholePlaces < -maxExponent) ||
 		(exponent + wholePlaces > maxExponent)) {
 		Error(errRealOutOfRange);
-		return
+		return;
 	}
 	if (exponent != 0)
 		numValue *= float(pow(10, exponent));
@@ -107,7 +108,7 @@ void NumberToken::Get(TextInBuffer *buffer)
 }
 
 int NumberToken::AccumulateValue(TextInBuffer &buffer,
-								float &value, TerrorCode ec) {
+								float &value, ErrorCode ec) {
 	const int maxDigitCount = 20;
 
 	// Error if the first character is not a digit

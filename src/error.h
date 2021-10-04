@@ -10,7 +10,7 @@ enum AbortCode {
 	abortSourceFileOpenFailed = -2,
 	abortIFormFileOpenFailed = -3,
 	abortAssemblyFileOpenFailed = -4,
-	abortTooManySyntaxErors = -5,
+	abortTooManySyntaxErrors = -5,
 	abortStackOverflow = -6,
 	abortCodeSegmentOverflow = -7,
 	abortNestingTooDeep = -8,
