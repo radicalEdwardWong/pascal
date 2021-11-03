@@ -2,7 +2,7 @@ CPPGNU = g++ -std=c++0x
 
 SOURCE = src/
 
-TARGET = compact
+TARGET = xref1
 
 all: $(TARGET)
 

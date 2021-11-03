@@ -5,30 +5,27 @@
 
 void Parser::Parse(void)
 {
-	int currIsDelimiter;
-	int prevIsDelimiter = true;
-
 	do {
 		GetToken();
 
-		if (token == tcEndOfFile) {
+		if (token == tcEndOfFile) { // shouldn't see end of file
 			Error(errUnexpectedEndOfFile);
 			break;
 		}
 
-		if (token != tcError) {
-			currIsDelimiter = pToken->IsDelimiter();
-
-			if (!prevIsDelimiter && !currIsDelimiter) {
-				pCompact->PutBlank();
-			}
-			pCompact->Put(pToken->String());
-
-			prevIsDelimiter = currIsDelimiter;
+		// Enter each identifier into the symbol table
+		// if it isn't already there
+		if (token == tcIdentifier) {
+			SymtabNode *pNode = globalSymtab.Search(pToken->String());
+			if (!pNode)
+				pNode = globalSymtab.Enter(pToken->String());
 		}
-		else
-			Error(errUnrecognizable);
-	} while (token != tcPeriod);
+	} while(token != tcPeriod);
 
-	pCompact->PutLine();
+	// print summary
+	list.PutLine();
+	sprintf(list.text, "%20d source lines.", currentLineNumber);
+	list.PutLine();
+	sprintf(list.text, "%20d syntax errors.", errorCount);
+	list.PutLine();
 }

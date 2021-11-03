@@ -12,7 +12,7 @@ class LineNumList;
 class SymtabNode {
 	private:
 		SymtabNode  *left, *right;
-		char *pSring; // symbol string
+		char *pString; // symbol string
 		short xSymtab; // symbol table index
 		short xNode; // node index
 		LineNumList *pLineNumList; // list of line numbers
@@ -22,7 +22,7 @@ class SymtabNode {
 	public:
 
 	float value;
-	SymabNode(const char *pStr);
+	SymtabNode(const char *pStr);
 	~SymtabNode(void);
 
 	SymtabNode *LeftSubtree (void) const { return left; }
@@ -37,14 +37,14 @@ class Symtab {
 	private:
 		SymtabNode *root; // binary tree root
 		short cntNodes; // node counter
-		short Symtab; // symbol table index
+		short xSymtab; // symbol table index
 
 	public:
 		Symtab()
 		{
-			root = NUL;
+			root = NULL;
 			cntNodes = 0;
-			Symtab = 0;
+			xSymtab = 0;
 		}
 
 		~Symtab() { delete root; }

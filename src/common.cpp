@@ -6,4 +6,4 @@
 int currentNestingLevel = 0;
 int currentLineNumber = 0;
 
-
+Symtab globalSymtab; // the global symbol table

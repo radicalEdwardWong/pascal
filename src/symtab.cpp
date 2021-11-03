@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <iostream.h>
+#include <iostream>
 #include "buffer.h"
 #include "symtab.h"
 
@@ -8,7 +8,7 @@ int xrefFlag = false; // true = cross-referencing on, false = off
 SymtabNode::SymtabNode(const char *pStr)
 {
 	left = right = NULL;
-	pLineNumList = NUL;
+	pLineNumList = NULL;
 	value = 0.0;
 	xNode = 0;
 
@@ -96,7 +96,7 @@ SymtabNode *Symtab::Enter(const char *pString)
 	return pNode; // return ptr to it
 }
 
-LineNumList::~LineNumList(void
+LineNumList::~LineNumList(void)
 {
 	while (head) {
 		LineNumNode *pNode = head; // ptr to node to delete
@@ -117,36 +117,36 @@ void LineNumList::Update(void)
 }
 
 /* newLineFlag: if true, start a new line immediately
- * ident: amount to ident subsequent lines
+ * indent: amount to indent subsequent lines
  */
-void LineNumList::Print(int newLineFlag, int ident) const
+void LineNumList::Print(int newLineFlag, int indent) const
 {
 	const int maxLineNumberPrintWidth = 4;
 	const int maxLineNumbersPerLine = 10;
 
 	int n; // count of numbers per line
 	LineNumNode *pNode; // ptr to line number node
-	char *plt = &list.text[strlen(list.text); // ptr to where in list text to append
+	char *plt = &list.text[strlen(list.text)]; // ptr to where in list text to append
 
 	n = newLineFlag ? 0 : maxLineNumbersPerLine;
 
 	// for each line number node in list
-	for (pNode = head; pNode; pNode = pNode->Next) {
+	for (pNode = head; pNode; pNode = pNode->next) {
 
 		// start new line i current one is full
 		if (n == 0) {
 			list.PutLine();
-			sprintf(list.text, '&*s", ident, " ");
-			plt = &list.text[ident];
+			sprintf(list.text, "%*s", indent, " ");
+			plt = &list.text[indent];
 			n = maxLineNumbersPerLine;
 		}
 
 		// append the line number to the list text
-		sprintf(plt, "&*d", maxLineNumberPrintWidth, pNode->number);
+		sprintf(plt, "%*d", maxLineNumberPrintWidth, pNode->number);
 		plt += maxLineNumberPrintWidth;
 
 		--n;
 	}
 
-	list.PutLint();
+	list.PutLine();
 }
