@@ -10,6 +10,7 @@ extern CharCode charCodeMap[];
 
 class Token {
 	protected:
+		friend class ICode;
 		TokenCode code;
 		DataType type;
 		DataValue value;
