@@ -5,6 +5,9 @@
 #include "token.h"
 #include "scanner.h"
 #include "complist.h"
+#include "icode.h"
+
+extern Icode *pIcode;
 
 class Parser {
 	private:
