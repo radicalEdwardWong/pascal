@@ -5,24 +5,52 @@
 
 void Parser::Parse(void)
 {
-	do {
+	// placeholder for the size of the crunched program
+	pIcode->Put(0);
+
+	// extract and put tokens
+	do
+	{
 		GetToken();
 
-		if (token == tcEndOfFile) { // shouldn't see end of file
+		// Shouldn't see an end of file
+		if (token == tcEndOfFile) {
 			Error(errUnexpectedEndOfFile);
 			break;
 		}
 
-		// Enter each identifier into the symbol table
-		// if it isn't already there
-		if (token == tcIdentifier) {
+		// enter each identifier, number, and string into the
+		// symbol table if it isn't already in there, then
+		// put the token
+		switch (token) {
+		case tcIdentifier:
+		case tcNumber:
+		case tcString:
+		{
 			SymtabNode *pNode = globalSymtab.Search(pToken->String());
 			if (!pNode)
 				pNode = globalSymtab.Enter(pToken->String());
+			pIcode->Put(token, (short)pNode->NodeIndex());
+			break;
+		}
+		default:
+			pIcode->Put(token);
+			break;
 		}
 	} while(token != tcPeriod);
 
-	// print summary
+	// remember the icode size at this point
+	int programSize = pIcode->Size();
+
+	// put symbol table
+	pIcode->Put(globalSymtab.NodeCount());
+	pIcode->Put(globalSymtab.Root());
+
+	// put size at the head of the file
+	pIcode->GoTo(0);
+	pIcode->Put(programSize);
+
+	// print the parser's summary
 	list.PutLine();
 	sprintf(list.text, "%20d source lines.", currentLineNumber);
 	list.PutLine();

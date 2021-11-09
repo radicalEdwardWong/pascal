@@ -1,7 +1,7 @@
 #ifndef icode_h
 #define icode_h
 
-#include <fstream.h>
+#include <fstream>
 #include "token.h"
 #include "scanner.h"
 
@@ -26,9 +26,11 @@ public:
 
 	void Put(int value);
 	void Put(TokenCode tc, short index = -1);
-	vod Put(const SymtabNode *pNode);
+	void Put(const SymtabNode *pNode);
 
 	virtual Token *Get (void);
 	int GetInteger(void);
 	void GetSymtabStrings(void);
 };
+
+#endif

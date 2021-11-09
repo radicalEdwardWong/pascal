@@ -2,7 +2,7 @@
 #include "icode.h"
 
 // special symbols and reserved word strings
-char *symbolStrings[] = {
+const char *symbolStrings[] = {
 	NULL,
 	NULL, NULL, NULL, NULL,
 
@@ -23,11 +23,11 @@ Icode::Icode(const char *pIformFileName, Mode mode)
 {
 	// open the file
 	if (mode == input)
-		file.open(pIformFileName, ios::in || ios::binary);
+		file.open((const char*&)pIformFileName, ios::in | ios::binary);
 	else
 	{ // mode == output
 		size = 0;
-		file.open(pIformFileName, ios::out || ios::binary);
+		file.open(pIformFileName, ios::out | ios::binary);
 	}
 
 	if (!file.good())
@@ -54,20 +54,20 @@ Icode::~Icode(void)
  */
 void Icode::Put(int value)
 {
-	file.write((const signed char *) &value, sizeof(int))
-	size += siezof(int);
+	file.write((const char *)(const signed char *) &value, sizeof(int));
+	size += sizeof(int);
 }
 
-void Icode::Put(Token tc, short index)
+void Icode::Put(TokenCode tc, short index)
 {
 	// append the token code
 	char code = tc;
-	file.write((const signed char *) &code, sizeof(char));
+	file.write((const char *)(const signed char *) &code, sizeof(char));
 	size += sizeof(char);
 
 	// Append the symbol table node index if it's not -1
 	if (index != -1) {
-		file.write((const signed char *) &index, sizeof(short));
+		file.write((const char *)(const signed char *) &index, sizeof(short));
 		size += sizeof(short);
 	}
 }
@@ -82,10 +82,10 @@ void Icode::Put(const SymtabNode *pNode)
 
 	// subtree root
 	char length = strlen(pNode->String()) + 1;
-	short index = pNOde->nodeIndex();
-	file.write(const signed char *) &index, sizeof(short));
-	file.write(const signed char *) &length, sizeof(char));
-	file.write(const signed char *) &pNode-STring(), length);
+	short index = pNode->NodeIndex();
+	file.write((const char *) &index, sizeof(short));
+	file.write((const char *) &length, sizeof(char));
+	file.write((const char *) pNode->String(), length);
 	size += sizeof(short) + sizeof(char) + length;
 
 	// right subtree
@@ -97,12 +97,12 @@ void Icode::Put(const SymtabNode *pNode)
  */
 Token *Icode::Get(void)
 {
-	Token pToken; // ptr to token to return
+	Token *pToken; // ptr to token to return
 	char code; // token code read from the file
 	TokenCode token;
 
 	// extract the token code
-	file.read((signed char *) &code, sizeof(char));
+	file.read((char *) &code, sizeof(char));
 	token = (TokenCode)code;
 
 	// resolve token class by token code
@@ -110,11 +110,11 @@ Token *Icode::Get(void)
 	case tcNumber:
 		pToken = &numberToken;
 		break;
-	case tcSring:
+	case tcString:
 		pToken = &stringToken;
 		break;
 	case tcIdentifier:
-		pToken = &wordToken
+		pToken = &wordToken;
 		pToken->code = tcIdentifier;
 		break;
 	default:
@@ -125,7 +125,7 @@ Token *Icode::Get(void)
 		else
 		{
 			pToken = &wordToken; // reserved word
-			pToken=>code = token;
+			pToken->code = token;
 		}
 		break;
 	}
@@ -136,8 +136,8 @@ Token *Icode::Get(void)
 	case tcNumber:
 	case tcString:
 		short index; // symbol table node index
-		file.read((signed char *) &index, sizeof(short));
-		srcpy(pToken->string, symtabStrings[index]);
+		file.read((char *) &index, sizeof(short));
+		strcpy(pToken->string, symtabStrings[index]);
 		break;
 	default:
 		strcpy(pToken->string, symbolStrings[code]);
@@ -151,7 +151,7 @@ int Icode::GetInteger(void)
 {
 	int value;
 
-	file.read((signed char *) &value, sizeof(int));
+	file.read((char *) &value, sizeof(int));
 	return value;
 }
 
@@ -163,17 +163,17 @@ void Icode::GetSymtabStrings(void)
 
 	// First extract the count of strings and allocate
 	// the vector of string pointers
-	file.read((signed char *) &count, sizeof(int));
+	file.read((char *) &count, sizeof(int));
 	symtabStrings = new char *[count];
 	symtabCount = count;
 
 	// Then extract the strings
 	do
 	{
-		file.read((signed char *) &index, sizeof(short));
-		file.read((signed char *) &length, sizeof(char));
+		file.read((char *) &index, sizeof(short));
+		file.read((char *) &length, sizeof(char));
 
 		symtabStrings[index] = new char[length];
-		file.read(signed char *) symtabSrings[index], length);
-	} whie (--count > 0);
+		file.read((char *) symtabStrings[index], length);
+	} while (--count > 0);
 }

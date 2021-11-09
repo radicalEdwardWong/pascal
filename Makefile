@@ -2,7 +2,7 @@ CPPGNU = g++ -std=c++0x
 
 SOURCE = src/
 
-TARGET = xref1
+TARGET = crunch
 
 all: $(TARGET)
 
